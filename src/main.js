@@ -1,5 +1,5 @@
 import './styles.css';
-import { Loudpack } from './loudpack.js';
+import { Tamagotchi } from './tamagotchi.js';
 import $ from 'jquery';
 
 
@@ -7,10 +7,10 @@ $(document).ready(function(){
   $("#inputForm").submit(function(event){
     event.preventDefault();
 
-    let userString = $("#inputText").val();
-    let string = new Loudpack(userString);
+    let userName = $("#inputText").val();
+    let newThing = new Tamagotchi(userName);
     $(".resultDiv").empty();
-    $(".resultDiv").text(string.string);
+    $(".resultDiv").text(newThing.name);
 
   });
 });
