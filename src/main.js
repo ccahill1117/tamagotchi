@@ -10,28 +10,42 @@ function displayTamagotchi(game) {
   var tamagotchiList = $("div#tamagotchi");
   var htmlForTamagotchiInfo = "";
   game.tamagotchis.forEach(function(tama) {
-    htmlForTamagotchiInfo += "<div id=" + tama.id + ">" + tama.name + " " + tama.food + " " + "🐯" + "</div>";
+    htmlForTamagotchiInfo += "<div id=" + tama.id + ">" + tama.name + " " + tama.food + " " + "🐯" + "<button type='button' class='feed' id='" + tama.id + "'>feed me</button>" + "</div>";
   })
   tamagotchiList.html(htmlForTamagotchiInfo);
 }
+
+function attachContactListeners() {
+  $("buttons").on("click", ".feed", function() {
+    Tamagotchi.feed(this.id);
+  })
+}
+
 
 
 $(document).ready(function(){
 
   let newGame = new Game;
-
+  attachContactListeners();
 
 
   $("#inputForm").submit(function(event) {
     event.preventDefault();
-    const updateDisplay = setInterval(() => {
-      displayTamagotchi(newGame);
-    },300)
+
     let userName = $("#inputText").val();
     let newThing = new Tamagotchi(userName);
     newGame.addTamagotchi(newThing);
-    updateDisplay();
+    // updateDisplay();
+    displayTamagotchi(newGame);
   });
+
+  $("button").on("click",function() {
+    console.log($(this).id);
+  })
+
+  $("body").on("click",function() {
+    console.log("body clicked");
+  })
 
   $('#weatherLocation').click(function() {
     const city = $('#location').val();
