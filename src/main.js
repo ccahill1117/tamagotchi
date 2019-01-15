@@ -15,18 +15,25 @@ function displayTamagotchi(game) {
   tamagotchiList.html(htmlForTamagotchiInfo);
 }
 
-function attachContactListeners() {
-  $("buttons").on("click", ".feed", function() {
-    Tamagotchi.feed(this.id);
-  })
-}
 
 
 
 $(document).ready(function(){
-
   let newGame = new Game;
+
+  function attachContactListeners() {
+    $("div#tamagotchi").on("click", "button", function() {
+      console.log("the id is" + this.id + ".");
+      newGame.feedTamagotchi(this.id);
+      updateDisplay();
+    })
+  }
   attachContactListeners();
+
+  const updateDisplay = setInterval(() => {
+    displayTamagotchi(newGame);
+    attachContactListeners();
+  },300)
 
 
   $("#inputForm").submit(function(event) {
@@ -35,17 +42,12 @@ $(document).ready(function(){
     let userName = $("#inputText").val();
     let newThing = new Tamagotchi(userName);
     newGame.addTamagotchi(newThing);
-    // updateDisplay();
-    displayTamagotchi(newGame);
+    updateDisplay();
+
   });
 
-  $("button").on("click",function() {
-    console.log($(this).id);
-  })
 
-  $("body").on("click",function() {
-    console.log("body clicked");
-  })
+
 
   $('#weatherLocation').click(function() {
     const city = $('#location').val();
