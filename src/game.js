@@ -30,4 +30,8 @@ export class Game {
     toBeFed.food = 100;
   }
 
+  sleepTamagotchi(tamagotchiID) {
+    let toBeSlept = this.findTamagotchi(tamagotchiID);
+    toBeSlept.sleep = 100;
+  }
 }

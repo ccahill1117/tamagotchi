@@ -16,8 +16,6 @@ function displayTamagotchi(game) {
 }
 
 
-
-
 $(document).ready(function(){
   let newGame = new Game;
 
@@ -28,12 +26,13 @@ $(document).ready(function(){
       updateDisplay();
     })
   }
+
   attachContactListeners();
 
   const updateDisplay = setInterval(() => {
-    displayTamagotchi(newGame);
     attachContactListeners();
-  },300)
+    displayTamagotchi(newGame);
+  },1000)
 
 
   $("#inputForm").submit(function(event) {
@@ -42,12 +41,9 @@ $(document).ready(function(){
     let userName = $("#inputText").val();
     let newThing = new Tamagotchi(userName);
     newGame.addTamagotchi(newThing);
-    updateDisplay();
+    displayTamagotchi(newGame);
 
   });
-
-
-
 
   $('#weatherLocation').click(function() {
     const city = $('#location').val();
@@ -71,6 +67,7 @@ $(document).ready(function(){
       $('.showTemp').text(`The temperature in Kelvins is ${response.main.temp} degrees.`);
     }
   });
+
 
 
 });
